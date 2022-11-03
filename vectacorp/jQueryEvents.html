@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Events</title>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        // Instruction 1
+        $("#button1").click(function() {
+            alert("Button 1 has been clicked");
+        });
+
+        //Instruction 2
+        $("#button2").bind("click", function() {
+            alert("Button 2 has been clicked");
+        });
+
+        //Instruction 3
+        $("#button3").on("click", function() {
+            alert("Button 3 has been clicked");
+        });
+
+        //Instruction 4
+        $(".button4").on("click", function() {
+            alert("Button 4.1 or 4.2 has been clicked");
+        });
+
+        //Instruction 5
+        $("#div1").width("400px")
+                  .height("400px")
+                  .css("border", "solid 2px black")
+                  .on({
+                      "click": function() {
+                        alert("The div was clicked on!");
+                      },
+
+                    //   "mouseenter": function() {
+                    //     alert("The mouse entered the div!");
+
+                    //   },
+
+                    //   "mouseleave": function() {
+                    //     alert("The mouse left the div!");
+                    //   }
+                  });
+
+
+        //Instruction 6
+        $("#div1").on({
+                        "click": function() {
+                            $("#messageDisplay").text("The div was clicked on!");
+                        },
+
+                        "mouseenter": function() {
+                            $("#messageDisplay").text("The mouse entered the div!");
+                        },
+
+                        "mouseleave": function() {
+                            $("#messageDisplay").text("The mouse left the div!");
+                        }
+                     });
+
+
+        //Instruction 7
+        $("#moduleMedia").on("click", function(event) {
+            event.preventDefault();
+            $(this).css("color", "red");
+            window.alert('tag' + event.target.nodeName + ' triggered the event');
+        });
+
+
+        //Instruction 8
+        $(window).resize(function() {
+            $("#div2").text("Width of the window: " + $(window).width() + " Height of the window: " + $(window).height());
+        });
+
+        //Instruction 9
+        $("#textArea").on({
+                'focus' : function() {
+                    $('#textArea').css('background-color','lightgray');
+                },
+                'blur' : function() {
+                    $('#textArea').css('background-color','white');
+                }
+        });
+
+
+        //Instruction 10
+        $("form").on("submit", function(event) {
+
+            event.preventDefault();
+
+            var name = $("#name").val();
+            var emailId = $("#emailAddress").val();
+
+            if(name){
+                $("#name").css("border", "1px solid green");
+            }
+
+            else{
+                $("#name").css("border", "1px solid red");
+                alert("Name field is Required!");
+            }
+
+            if(emailId){
+                $("#emailAddress").css("border", "1px solid green");
+            }
+
+            else{
+                $("#emailAddress").css("border", "1px solid red");
+                alert("Email field is Required!");
+
+            }
+        });
+
+
+
+    })
+    </script>
+</head>
+<body>
+    <button id="button1">Button 1</button>
+    <button id="button2">Button 2</button>
+    <button id="button3">Button 3</button>
+    <button class="button4">Button 4.1</button>
+    <button class="button4">Button 4.2</button>
+
+    <div id="div1"></div>
+
+    <span id="messageDisplay"></span>
+
+    <a id="moduleMedia" href="http://modulemedia.com">Module Media</a>
+
+    <div id="div2"></div>
+
+    <input type="text" id="textArea">
+
+    <form>
+        <input type="text" id="name">
+        <input type="email" id="emailAddress">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
